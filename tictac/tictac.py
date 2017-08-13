@@ -1,12 +1,21 @@
-def print_board(size):
-    ''' print a board of x X x'''
+import math
+import board_display
+import board_check
 
-    Next_line=1-size
-    for i in range(size):
-         Next_line = Next_line+ size
-         line=[]
-         for j in range (size):
-            line.append(Next_line+j)
-         print(line)
+def board_print_n_check(board):
+    board_display.reprint_board(board)
+    board_check.game_over_check(board)
 
-print_board(3)
+def mark_board():
+    '''Mark "X" (Player 1) or "O" (Player2) at requested position'''
+    board = board_display.empty_board()
+    board_display.reprint_board(board)
+    while board_check.game_over_check(board)!=True:
+        position=raw_input("Player 1: Input position for Mark 'X'")
+        board[int(position)-1]="X"
+        board_print_n_check(board)
+        position = raw_input("Player 2: Input position for Mark 'O'")
+        board[int(position) - 1] = "O"
+        board_print_n_check(board)
+
+mark_board()
